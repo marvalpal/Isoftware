@@ -1,10 +1,12 @@
 package blastGUI;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -67,7 +69,8 @@ public class MiPanel extends JPanel {
 	public JRadioButton NucleotidButton;
 	
 	//ComboBox
-	String[] options= {};
+	//public ArrayList<String> options = new ArrayList<String>();
+	public String[] options= {};
 	public JComboBox<String> comboOfOptions;
 	
 	//TextField para el porcentaje
@@ -97,6 +100,7 @@ public class MiPanel extends JPanel {
 		
 		
 		//ComboBox
+		//String[] aux=options.toArray(String[]::new);
 		comboOfOptions = new JComboBox<String>(options);
 		comboOfOptions.setEditable(true);
 		
@@ -105,7 +109,7 @@ public class MiPanel extends JPanel {
 		lb.setVerticalTextPosition(JLabel.BOTTOM);
 		lb.setHorizontalTextPosition(JLabel.CENTER);
 		lb.setFont(new Font("TimesRoman",Font.PLAIN, 15));
-		JTextField tb= new JTextField("Default string" , 20) ;
+		tb= new JTextField("Default string" , 20) ;
 		
 		//Boton makequery
 		bQuery = new JButton("Make query");

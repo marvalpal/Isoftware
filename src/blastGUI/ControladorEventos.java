@@ -2,6 +2,8 @@ package blastGUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import blast.BlastController;
 
@@ -10,7 +12,7 @@ public class ControladorEventos implements ActionListener{
 
 	private static final String dataBaseFile = new String("yeast.aa");
 	private static final String dataBaseIndexes = new String("yeast.aa.indexs");
-	private char queryType;
+	private char queryType='p';
     private float prct;
     private String qSeq;
 	private MiPanel miPanel;
@@ -35,6 +37,17 @@ public class ControladorEventos implements ActionListener{
 		if (e.getSource() == miPanel.NucleotidButton) {
 			queryType='n';
 		}
+		if (e.getSource() == miPanel.comboOfOptions) {
+			Object selected = miPanel.comboOfOptions.getSelectedItem();
+            String command = e.getActionCommand();
+            // Detect whether the action command is "comboBoxEdited"
+            // or "comboBoxChanged"
+            if ("comboBoxEdited".equals(command)) {
+            	miPanel.comboOfOptions.addItem(selected.toString());
+            } else if ("comboBoxChanged".equals(command)) {
+               qSeq=(String) selected;
+            }
+		}
 		if(e.getSource()==miPanel.bQuery) {
 			BlastController bCnt = new BlastController();
 			try{
@@ -46,7 +59,6 @@ public class ControladorEventos implements ActionListener{
 			} catch(Exception exc){
 				System.out.println("Error en la llamada: " + exc.toString());
 			}
-			//System.out.println("El botón query funciona");
 		}
 	}
 	
