@@ -1,5 +1,6 @@
 package blastGUI;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -28,7 +29,7 @@ public class MiPanel extends JPanel {
 	private JButton buttonLogin = new JButton("Login");
 	
 	public MiPanel() {
-		JPanel newPanel = new JPanel(new GridBagLayout());
+	JPanel newPanel = new JPanel(new GridBagLayout());
 	
     
     GridBagConstraints constraints = new GridBagConstraints();
@@ -62,12 +63,32 @@ public class MiPanel extends JPanel {
     newPanel.setBorder(BorderFactory.createTitledBorder(
             BorderFactory.createEtchedBorder(), "Login Panel"));
 	}*/
+	public JRadioButton ProteinButton;
+	public JRadioButton NucleotidButton;
+	
+	//ComboBox
+	String[] options= {};
+	public JComboBox<String> comboOfOptions;
+	
+	//TextField para el porcentaje
+	public JTextField tb;
+	
+	//Boton makequery
+	public JButton bQuery;
+	
+	public JTextArea textArea;
+	
 	public MiPanel() {
-		this.setLayout(new GridLayout(3,1));
+		this.setLayout(new GridBagLayout());
+		
+		GridBagConstraints constraints = new GridBagConstraints();
+	    
+	    constraints.anchor= GridBagConstraints.WEST;
+	    constraints.insets = new Insets(20, 20, 20, 20);
 		
 		//Botones radio
-		JRadioButton ProteinButton = new JRadioButton("Protein") ;
-		JRadioButton NucleotidButton = new JRadioButton("Nuecleotid") ;
+		ProteinButton = new JRadioButton("Protein") ;
+		NucleotidButton = new JRadioButton("Nuecleotid") ;
 		
 		ButtonGroup group = new ButtonGroup ( ) ;
 		group.add(ProteinButton);
@@ -76,21 +97,70 @@ public class MiPanel extends JPanel {
 		
 		
 		//ComboBox
-		String[] options= {};
-		JComboBox<String> comboOfOptions = new JComboBox<String>(options);
+		comboOfOptions = new JComboBox<String>(options);
 		comboOfOptions.setEditable(true);
 		
 		//TextField para el porcentaje
+		JLabel lb=new JLabel("Percentaje",JLabel.CENTER) ;
+		lb.setVerticalTextPosition(JLabel.BOTTOM);
+		lb.setHorizontalTextPosition(JLabel.CENTER);
+		lb.setFont(new Font("TimesRoman",Font.PLAIN, 15));
 		JTextField tb= new JTextField("Default string" , 20) ;
 		
 		//Boton makequery
-		JButton b1 = new JButton("Make query");
+		bQuery = new JButton("Make query");
 		
 		//textArea para el resultado
-		JTextArea textArea = new JTextArea(20,70) ;
+		textArea = new JTextArea(10,50) ;
 		JPanel p= new JPanel();
 		JScrollPane scrollPane = new JScrollPane(textArea) ;
 		p.add(scrollPane);
+		
+		constraints.gridx=0;
+	    constraints.gridy=0;
+	    constraints.gridwidth=1;
+	    constraints.gridheight=1;
+	    this.add(ProteinButton, constraints);
+	    
+	    constraints.gridx=0;
+	    constraints.gridy=1;
+	    constraints.gridwidth=1;
+	    constraints.gridheight=1;
+	    this.add(NucleotidButton, constraints);
+	    
+	    constraints.gridx=1;
+	    constraints.gridy=0;
+	    constraints.gridwidth=2;
+	    constraints.gridheight=2;
+	    constraints.fill = GridBagConstraints.BOTH;
+	    constraints.weighty = 1.0;
+	    this.add(comboOfOptions, constraints);
+	    constraints.weighty = 0.0; // Restauramos al valor por defecto, para no afectar a los siguientes componentes.
+
+	    
+	    constraints.gridx=0;
+	    constraints.gridy=2;
+	    constraints.gridwidth=1;
+	    constraints.gridheight=1;
+	    this.add(lb, constraints);
+	    
+	    constraints.gridx=1;
+	    constraints.gridy=2;
+	    constraints.gridwidth=1;
+	    constraints.gridheight=1;
+	    this.add(tb, constraints);
+	    
+	    constraints.gridx=0;
+	    constraints.gridy=3;
+	    constraints.gridwidth=1;
+	    constraints.gridheight=1;
+	    this.add(bQuery, constraints);
+	    
+	    constraints.gridx=0;
+	    constraints.gridy=4;
+	    constraints.gridwidth=3;
+	    constraints.gridheight=3;
+	    this.add(p, constraints);
 		
 		
 	}

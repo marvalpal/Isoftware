@@ -1,8 +1,18 @@
 package blastGUI;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import blast.BlastController;
+
 public class ControladorEventos implements ActionListener{
+	
+
+	private static final String dataBaseFile = new String("yeast.aa");
+	private static final String dataBaseIndexes = new String("yeast.aa.indexs");
+	private char queryType;
+    private float prct;
+    private String qSeq;
 	private MiPanel miPanel;
 	
 	/*
@@ -12,6 +22,32 @@ public class ControladorEventos implements ActionListener{
 	 */
 	public ControladorEventos(MiPanel mp) {
 		miPanel=mp;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == miPanel.ProteinButton) {
+			queryType='p';
+		}
+		if (e.getSource() == miPanel.NucleotidButton) {
+			queryType='n';
+		}
+		if (e.getSource() == miPanel.NucleotidButton) {
+			queryType='n';
+		}
+		if(e.getSource()==miPanel.bQuery) {
+			BlastController bCnt = new BlastController();
+			try{
+				prct=Float.valueOf(miPanel.tb.getText());
+				qSeq=miPanel.comboOfOptions.getSelectedItem().toString();
+				String result = bCnt.blastQuery(queryType, dataBaseFile, 
+						dataBaseIndexes, (float) prct, qSeq);
+				miPanel.textArea.setText(result);
+			} catch(Exception exc){
+				System.out.println("Error en la llamada: " + exc.toString());
+			}
+			//System.out.println("El botón query funciona");
+		}
 	}
 	
 

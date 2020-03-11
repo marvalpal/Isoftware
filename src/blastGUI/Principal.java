@@ -32,8 +32,13 @@ public class Principal {
 		frame . setDefaultCloseOperation(JFrame . EXIT_ON_CLOSE) ;
 		
 		MiPanel panelPrincipal=new MiPanel();
-		//ControladorEventos controladorPanel=new ControladorEventos(panelPrincipal);
-		//panelPrincipal.addActionListener(controladorPanel);
+		ControladorEventos controladorPanel=new ControladorEventos(panelPrincipal);
+		ControladorEventos c2=new ControladorEventos(panelPrincipal);
+
+		panelPrincipal.bQuery.addActionListener(controladorPanel);
+		panelPrincipal.NucleotidButton.addActionListener(controladorPanel);
+		panelPrincipal.ProteinButton.addActionListener(controladorPanel);
+		//panelPrincipal.bQuery.addActionListener(controladorPanel);
 		 
 		frame.getContentPane().add(panelPrincipal) ;
 		
