@@ -3,7 +3,10 @@ package blastGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 import blast.BlastController;
 
@@ -16,6 +19,7 @@ public class ControladorEventos implements ActionListener{
     private float prct;
     private String qSeq;
 	private MiPanel miPanel;
+	private List<String> aux= new ArrayList<String>();
 	
 	/*
 	 * Cuando se escribe un nuevo valor en el ComboBox editable, el ActionCommand del evento generado es "comboBoxEdited" y 
@@ -28,34 +32,42 @@ public class ControladorEventos implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource() == miPanel.ProteinButton) {
+		if (e.getSource() == miPanel.getProteinButton()) {
 			queryType='p';
 		}
-		if (e.getSource() == miPanel.NucleotidButton) {
+		if (e.getSource() == miPanel.getNucleotidButton()) {
 			queryType='n';
+
+            JDialog d = new JDialog();
+            JLabel l = new JLabel("Warning: La comparación de nucleótidos no está implementada."); 
+  
+            d.add(l); 
+  
+            d.setSize(400, 100); 
+            d.setVisible(true); 
+            d.setLocationRelativeTo(null);
 		}
-		if (e.getSource() == miPanel.NucleotidButton) {
-			queryType='n';
-		}
-		if (e.getSource() == miPanel.comboOfOptions) {
-			Object selected = miPanel.comboOfOptions.getSelectedItem();
+		if (e.getSource() == miPanel.getComboBox()) {
+			Object selected = miPanel.getComboBox().getSelectedItem();
             String command = e.getActionCommand();
-            // Detect whether the action command is "comboBoxEdited"
-            // or "comboBoxChanged"
             if ("comboBoxEdited".equals(command)) {
-            	miPanel.comboOfOptions.addItem(selected.toString());
+            	for(int i=0;i<miPanel.getComboBox().getItemCount();i++) {
+            		aux.add(miPanel.getComboBox().getItemAt(i));
+            	}
+            	if(!aux.contains(selected.toString())) {
+            		miPanel.getComboBox().addItem(selected.toString());
+            	}
             } else if ("comboBoxChanged".equals(command)) {
                qSeq=(String) selected;
             }
 		}
-		if(e.getSource()==miPanel.bQuery) {
+		if(e.getSource()==miPanel.getbQuery()) {
 			BlastController bCnt = new BlastController();
 			try{
-				prct=Float.valueOf(miPanel.tb.getText());
-				qSeq=miPanel.comboOfOptions.getSelectedItem().toString();
+				prct=Float.valueOf(miPanel.getTextField().getText());
 				String result = bCnt.blastQuery(queryType, dataBaseFile, 
 						dataBaseIndexes, (float) prct, qSeq);
-				miPanel.textArea.setText(result);
+				miPanel.setTextArea(result);
 			} catch(Exception exc){
 				System.out.println("Error en la llamada: " + exc.toString());
 			}

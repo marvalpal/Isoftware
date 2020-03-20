@@ -12,10 +12,10 @@ public class Principal {
 		MiPanel panelPrincipal=new MiPanel();
 		ControladorEventos controladorPanel=new ControladorEventos(panelPrincipal);
 
-		panelPrincipal.bQuery.addActionListener(controladorPanel);
-		panelPrincipal.NucleotidButton.addActionListener(controladorPanel);
-		panelPrincipal.ProteinButton.addActionListener(controladorPanel);
-		panelPrincipal.comboOfOptions.addActionListener(controladorPanel);
+		panelPrincipal.getbQuery().addActionListener(controladorPanel);
+		panelPrincipal.getNucleotidButton().addActionListener(controladorPanel);
+		panelPrincipal.getProteinButton().addActionListener(controladorPanel);
+		panelPrincipal.getComboBox().addActionListener(controladorPanel);
 		 
 		frame.getContentPane().add(panelPrincipal) ;
 		

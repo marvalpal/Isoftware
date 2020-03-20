@@ -4,17 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -23,66 +19,25 @@ import javax.swing.JTextField;
 
 
 public class MiPanel extends JPanel {
-	/*
-	private JLabel labelUsername = new JLabel("Enter username: ");
-	private JLabel labelPassword = new JLabel("Enter password: ");
-	private JTextField textUsername = new JTextField(20);
-	private JPasswordField fieldPassword = new JPasswordField(20);
-	private JButton buttonLogin = new JButton("Login");
 	
-	public MiPanel() {
-	JPanel newPanel = new JPanel(new GridBagLayout());
-	
-    
-    GridBagConstraints constraints = new GridBagConstraints();
-    
-    constraints.anchor= GridBagConstraints.WEST;
-    constraints.insets = new Insets(10, 10, 10, 10);
-     
-    // add components to the panel
-    constraints.gridx = 0;
-    constraints.gridy = 0;     
-    newPanel.add(labelUsername, constraints);
-
-    constraints.gridx = 1;
-    newPanel.add(textUsername, constraints);
-     
-    constraints.gridx = 0;
-    constraints.gridy = 1;     
-    newPanel.add(labelPassword, constraints);
-     
-    constraints.gridx = 1;
-    newPanel.add(fieldPassword, constraints);
-     
-    constraints.gridx = 0;
-    constraints.gridy = 2;
-    constraints.gridwidth = 2;
-    constraints.anchor = GridBagConstraints.CENTER;
-    newPanel.add(buttonLogin, constraints);
-
-     
-    // set border for the panel
-    newPanel.setBorder(BorderFactory.createTitledBorder(
-            BorderFactory.createEtchedBorder(), "Login Panel"));
-	}*/
-	public JRadioButton ProteinButton;
-	public JRadioButton NucleotidButton;
+	private JRadioButton ProteinButton;
+	private JRadioButton NucleotidButton;
 	
 	//ComboBox
 	//public ArrayList<String> options = new ArrayList<String>();
-	public String[] options= {};
-	public JComboBox<String> comboOfOptions;
+	private JComboBox<String> comboOfOptions;
 	
 	//TextField para el porcentaje
-	public JTextField tb;
+	private JTextField tb;
 	
 	//Boton makequery
-	public JButton bQuery;
+	private JButton bQuery;
 	
-	public JTextArea textArea;
+	private JTextArea textArea;
 	
 	public MiPanel() {
 		this.setLayout(new GridBagLayout());
+		this.setBackground(Color.getHSBColor(173, 20, 77));
 		
 		GridBagConstraints constraints = new GridBagConstraints();
 	    
@@ -91,7 +46,9 @@ public class MiPanel extends JPanel {
 		
 		//Botones radio
 		ProteinButton = new JRadioButton("Protein") ;
+		ProteinButton.setBackground(Color.getHSBColor(173, 20, 77));
 		NucleotidButton = new JRadioButton("Nuecleotid") ;
+		NucleotidButton.setBackground(Color.getHSBColor(173, 20, 77));
 		
 		ButtonGroup group = new ButtonGroup ( ) ;
 		group.add(ProteinButton);
@@ -101,7 +58,7 @@ public class MiPanel extends JPanel {
 		
 		//ComboBox
 		//String[] aux=options.toArray(String[]::new);
-		comboOfOptions = new JComboBox<String>(options);
+		comboOfOptions = new JComboBox<String>();
 		comboOfOptions.setEditable(true);
 		
 		//TextField para el porcentaje
@@ -109,7 +66,7 @@ public class MiPanel extends JPanel {
 		lb.setVerticalTextPosition(JLabel.BOTTOM);
 		lb.setHorizontalTextPosition(JLabel.CENTER);
 		lb.setFont(new Font("TimesRoman",Font.PLAIN, 15));
-		tb= new JTextField("Default string" , 20) ;
+		tb= new JTextField("" , 20) ;
 		
 		//Boton makequery
 		bQuery = new JButton("Make query");
@@ -168,5 +125,29 @@ public class MiPanel extends JPanel {
 		
 		
 	}
+	
+	public JComboBox<String> getComboBox() {
+		return comboOfOptions;
+	}
+	public JRadioButton getProteinButton() {
+		return ProteinButton;
+	}
+	public JRadioButton getNucleotidButton() {
+		return  NucleotidButton;
+	}
+	
+	public JTextField getTextField() {
+		return tb;
+	}
+	
+	public JButton getbQuery(){
+		return bQuery;
+	}
+	
+	public void setTextArea(String s) {
+		textArea.setText(s);
+		
+	}
+	
 
 }
