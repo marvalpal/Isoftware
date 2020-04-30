@@ -1,0 +1,3 @@
+module libreriaJson {
+	requires gson;
+}
